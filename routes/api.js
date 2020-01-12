@@ -20,13 +20,34 @@ router.get('/employees', (req, res) => {
 
 //Get an employee data by adding the employee key as a query "key"
 router.get('/employee', (req, res) => {
-    const employeeId = req.query.key
-    firebase.getAnEmployee(employeeId)
+    const employeeKey = req.query.key
+    firebase.getAnEmployee(employeeKey)
         .then(data => {
             res.send(data.data())
         })
         .catch(err => res.send(err))
 
+})
+
+//deletes an employee data by adding the employee key as a query "key"
+router.get('/delete-employee', (req, res) => {
+    const employeeKey = req.query.key
+    firebase.deleteEmployee(employeeKey)
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => res.send(err))
+})
+
+// updates an employee data by adding the employee key and data as a query "key" and "data" respectively
+router.post('/update-employee', (req, res) => {
+    const employeeKey = req.query.key
+    const employeeData = req.query.data
+    firebase.updateEmployee(employeeKey, employeeData)
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => res.send(err))
 })
 
 module.exports = router

@@ -15,12 +15,16 @@ const firebase = {
         return db.collection('employees').get()
     },
 
-    getAnEmployee(id) {
-        return db.collection('employees').doc(id).get()
+    getAnEmployee(key) {
+        return db.collection('employees').doc(key).get()
     },
 
-    deleteEmployee() {
-        return db.collection('employees').doc(id).delete()
+    deleteEmployee(key) {
+        return db.collection('employees').doc(key).delete()
+    },
+
+    updateEmployee(key, data) {
+        return db.collection('employees').doc(key).update(data)
     }
 }
 
